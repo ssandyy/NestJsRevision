@@ -1,39 +1,47 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './entities/product.entity';
+import { PrismaService } from '../prisma/prisma.service';
+
 
 @Injectable()
 export class ProductService {
-  private products: Product[] = [];
-  create(createProductDto: CreateProductDto) {
-    const product: Product = {
-      id: Date.now().toString(),
-      ...createProductDto,
-    };
-    this.products.push(product);
-    return product;
+  constructor(private prisma: PrismaService) { }
+
+  async create(createProductDto: CreateProductDto) {
+    return this.prisma.product.create({
+      data: {
+        ...createProductDto,
+        images: createProductDto.images ? createProductDto.images.join(',') : null,
+        tags: createProductDto.tags ? createProductDto.tags.join(',') : null,
+      },
+    });
   }
 
-  findAll() {
-    return this.products;
+  async findAll() {
+    return this.prisma.product.findMany();
   }
 
-  findOne(id: string) {
-    return this.products.find((product) => product.id === id);
+  async findOne(id: string) {
+    return this.prisma.product.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: string, updateProductDto: UpdateProductDto) {
-    const product = this.findOne(id);
-    if (!product) {
-      throw new Error('Product not found');
-    }
-    product.name = updateProductDto.name;
-    product.price = updateProductDto.price;
-    return product;
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    return this.prisma.product.update({
+      where: { id },
+      data: {
+        ...updateProductDto,
+        images: updateProductDto.images ? updateProductDto.images.join(',') : undefined,
+        tags: updateProductDto.tags ? updateProductDto.tags.join(',') : undefined,
+      },
+    });
   }
 
-  remove(id: number) {
-    return {};
+  async remove(id: string) {
+    return this.prisma.product.delete({
+      where: { id },
+    });
   }
 }
