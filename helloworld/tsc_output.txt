@@ -1,0 +1,25 @@
+src/user/user.controller.ts(9,3): error TS1241: Unable to resolve signature of method decorator when called as an expression.
+  The runtime will invoke the decorator with 2 arguments, but the decorator expects 3.
+src/user/user.controller.ts(9,4): error TS1270: Decorator function return type 'void | TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((createUserDto: CreateUserDto) => Promise<{ name: string; email: string; age: number; password: string; id: string; }>)'.
+  Type 'TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((createUserDto: CreateUserDto) => Promise<{ name: string; email: string; age: number; password: string; id: string; }>)'.
+src/user/user.controller.ts(10,10): error TS1206: Decorators are not valid here.
+src/user/user.controller.ts(14,3): error TS1241: Unable to resolve signature of method decorator when called as an expression.
+  The runtime will invoke the decorator with 2 arguments, but the decorator expects 3.
+src/user/user.controller.ts(14,4): error TS1270: Decorator function return type 'void | TypedPropertyDescriptor<unknown>' is not assignable to type 'void | (() => Promise<any[]>)'.
+  Type 'TypedPropertyDescriptor<unknown>' is not assignable to type 'void | (() => Promise<any[]>)'.
+src/user/user.controller.ts(19,3): error TS1241: Unable to resolve signature of method decorator when called as an expression.
+  The runtime will invoke the decorator with 2 arguments, but the decorator expects 3.
+src/user/user.controller.ts(19,4): error TS1270: Decorator function return type 'void | TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((id: string) => Promise<any>)'.
+  Type 'TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((id: string) => Promise<any>)'.
+src/user/user.controller.ts(20,15): error TS1206: Decorators are not valid here.
+src/user/user.controller.ts(24,3): error TS1241: Unable to resolve signature of method decorator when called as an expression.
+  The runtime will invoke the decorator with 2 arguments, but the decorator expects 3.
+src/user/user.controller.ts(24,4): error TS1270: Decorator function return type 'void | TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((id: string, body: Partial<CreateUserDto>) => Promise<{ name?: string; email?: string; age?: number; password?: string; id: string; }>)'.
+  Type 'TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((id: string, body: Partial<CreateUserDto>) => Promise<{ name?: string; email?: string; age?: number; password?: string; id: string; }>)'.
+src/user/user.controller.ts(25,9): error TS1206: Decorators are not valid here.
+src/user/user.controller.ts(25,34): error TS1206: Decorators are not valid here.
+src/user/user.controller.ts(29,3): error TS1241: Unable to resolve signature of method decorator when called as an expression.
+  The runtime will invoke the decorator with 2 arguments, but the decorator expects 3.
+src/user/user.controller.ts(29,4): error TS1270: Decorator function return type 'void | TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((id: string) => Promise<{ id: string; }>)'.
+  Type 'TypedPropertyDescriptor<unknown>' is not assignable to type 'void | ((id: string) => Promise<{ id: string; }>)'.
+src/user/user.controller.ts(30,10): error TS1206: Decorators are not valid here.

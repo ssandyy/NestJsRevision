@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, ConflictException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
@@ -7,27 +7,31 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createUser(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const user = await this.userService.getUserByEmail(createUserDto.email);
+    if (user) {
+      throw new ConflictException('User already exists');
+    }
+    return await this.userService.createUser(createUserDto);
   }
 
   @Get()
-  getUser() {
-    return this.userService.getUser();
+  async getUser() {
+    return await this.userService.getUser();
   }
 
   @Get(':id') //localhost:1234/user/1
-  getUserById(@Param('id') id: string) {
-    return this.userService.getUserById(id);
+  async getUserById(@Param('id') id: string) {
+    return await this.userService.getUserById(id);
   }
 
   @Patch(':id') //localhost:1234/user/1
-  patch(@Param('id') id: string, @Body() body: Partial<CreateUserDto>) {
-    return this.userService.editUser(id, body);
+  async patch(@Param('id') id: string, @Body() body: Partial<CreateUserDto>) {
+    return await this.userService.editUser(id, body);
   }
 
   @Delete(':id') //localhost:1234/user/1
-  remove(@Param('id') id: string) {
-    return this.userService.deleteUser(id);   // setting the id as number 
+  async remove(@Param('id') id: string) {
+    return await this.userService.deleteUser(id);
   }
 }
