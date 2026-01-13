@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, ConflictException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, ConflictException, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UppercasePipe } from 'src/common/pipes/uppercase/uppercase.pipe';
+import { AuthGuard } from 'src/guards/auth/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -17,6 +18,7 @@ export class UserController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   async getUser() {
     return await this.userService.getUser();
   }
