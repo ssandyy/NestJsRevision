@@ -1,13 +1,14 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, ConflictException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UppercasePipe } from 'src/common/pipes/uppercase/uppercase.pipe';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body(UppercasePipe) createUserDto: CreateUserDto) {
     const user = await this.userService.getUserByEmail(createUserDto.email);
     if (user) {
       throw new ConflictException('User already exists');
